@@ -205,8 +205,8 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/mapa" className="hover:text-brand-wine transition-colors font-semibold text-brand-wine">
-                  Mapa dos Pisos ✦
+                <Link href="/mapa" className="hover:text-brand-wine transition-colors">
+                  Mapa do Shopping
                 </Link>
               </li>
             </ul>

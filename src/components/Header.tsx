@@ -17,9 +17,9 @@ const NAV_ITEMS = [
   { label: 'Visão Geral', href: '/' },
   { label: 'Lojas', href: '/lojas' },
   { label: 'Gastronomia', href: '/gastronomia' },
-  { label: 'Cinema VIP', href: '/cinema' },
+  { label: 'Cinema', href: '/cinema' },
   { label: 'Agenda', href: '/agenda' },
-  { label: 'Mapa dos Pisos', href: '/mapa' },
+  { label: 'Mapa', href: '/mapa' },
   { label: 'Comodidades', href: '/comodidades' },
   { label: 'Sobre', href: '/sobre' },
 ];
@@ -93,22 +93,22 @@ export function Header() {
         </div>
       </div>
 
-      {/* Main Sticky Navbar Fora.so Glass — Paleta Clara */}
+      {/* Main Sticky Navbar Fora.so Glass com amplo respiro */}
       <header
         className={`sticky top-0 z-40 w-full transition-all duration-300 ${
           scrolled
-            ? 'bg-warm-canvas/92 backdrop-blur-md py-3 shadow-[0_4px_24px_rgba(44,34,35,0.06)] border-b border-warm-border'
-            : 'bg-warm-canvas/80 backdrop-blur-md py-4 border-b border-warm-border/60'
+            ? 'bg-warm-canvas/92 backdrop-blur-md py-2.5 shadow-[0_4px_24px_rgba(44,34,35,0.06)] border-b border-warm-border'
+            : 'bg-warm-canvas/80 backdrop-blur-md py-3.5 border-b border-warm-border/60'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between gap-3 lg:gap-6">
           {/* Logo Oficial Partage Lago Sul */}
-          <Link href="/" className="transition-transform hover:scale-[1.01]">
+          <Link href="/" className="transition-transform hover:scale-[1.01] shrink-0">
             <Logo variant="wine" />
           </Link>
 
-          {/* Desktop Navigation — Pill Style Fora.so */}
-          <nav className="hidden xl:flex items-center gap-1 p-1 bg-warm-card border border-warm-border rounded-full shadow-[0_2px_8px_rgba(44,34,35,0.03)]">
+          {/* Desktop Navigation — Pill Style Arejada e Espaçosa */}
+          <nav className="hidden lg:flex items-center gap-0.5 p-1 bg-warm-card border border-warm-border rounded-full shadow-[0_2px_8px_rgba(44,34,35,0.03)]">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
@@ -116,7 +116,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-3.5 py-1.5 text-[11.5px] font-medium uppercase tracking-[0.12em] rounded-full transition-all ${
+                  className={`px-3 py-1.5 text-[11px] font-medium uppercase tracking-[0.12em] rounded-full transition-all whitespace-nowrap ${
                     isActive
                       ? 'text-white bg-brand-wine font-semibold shadow-sm'
                       : 'text-warm-taupe hover:text-warm-espresso hover:bg-white'
@@ -129,16 +129,16 @@ export function Header() {
           </nav>
 
           {/* CTA & Actions com Botão Spotlight Cmd+K */}
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
             <button
               type="button"
               onClick={() => setSpotlightOpen(true)}
-              className="inline-flex items-center gap-2 text-[11.5px] font-medium text-warm-taupe hover:text-warm-espresso bg-white border border-warm-border hover:border-brand-gold px-3.5 py-2 rounded-full transition-all shadow-xs"
+              className="inline-flex items-center gap-1.5 text-[11px] font-medium text-warm-taupe hover:text-warm-espresso bg-white border border-warm-border hover:border-brand-gold px-3 py-1.5 rounded-full transition-all shadow-xs"
               title="Buscar no Partage (Ctrl+K / ⌘K)"
             >
               <Search className="h-3.5 w-3.5 text-brand-wine" />
-              <span className="hidden sm:inline">Buscar...</span>
-              <kbd className="text-[10px] font-mono bg-warm-card text-warm-taupe px-1.5 py-0.5 rounded border border-warm-border">
+              <span className="hidden xl:inline">Buscar</span>
+              <kbd className="text-[9.5px] font-mono bg-warm-card text-warm-taupe px-1 py-0.5 rounded border border-warm-border leading-none">
                 ⌘K
               </kbd>
             </button>
@@ -147,7 +147,7 @@ export function Header() {
               href="https://waze.com/ul?ll=-15.864,-47.921&navigate=yes"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center justify-center px-5 py-2 text-[11.5px] font-semibold uppercase tracking-[0.16em] text-white bg-brand-wine hover:bg-brand-wine-dark rounded-full transition-all shadow-sm hover:shadow-wine-glow"
+              className="hidden sm:inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white bg-brand-wine hover:bg-brand-wine-dark rounded-full transition-all shadow-sm hover:shadow-wine-glow"
             >
               Como Chegar
             </a>
@@ -156,7 +156,7 @@ export function Header() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 text-warm-espresso hover:text-brand-wine transition-colors"
+              className="lg:hidden p-2 text-warm-espresso hover:text-brand-wine transition-colors"
               aria-label="Abrir menu de navegação"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -166,7 +166,7 @@ export function Header() {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="xl:hidden border-t border-warm-border bg-warm-canvas px-5 py-6 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="lg:hidden border-t border-warm-border bg-warm-canvas px-5 py-6 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
             <nav className="flex flex-col gap-1.5">
               {NAV_ITEMS.map((item) => {
                 const isActive =
