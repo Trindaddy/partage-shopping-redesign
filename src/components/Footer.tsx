@@ -253,44 +253,36 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-[13px] text-warm-taupe font-medium">
               <li>
-                <a
-                  href="https://partagelagosulshopping.com.br/politica-de-privacidade"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/politica-de-privacidade"
                   className="hover:text-brand-wine transition-colors"
                 >
                   Política de Privacidade
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="https://partagelagosulshopping.com.br/politica-de-cookies"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/politica-de-cookies"
                   className="hover:text-brand-wine transition-colors"
                 >
                   Política de Cookies
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="https://partagelagosulshopping.com.br/termos-de-uso"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/termos-de-uso"
                   className="hover:text-brand-wine transition-colors"
                 >
                   Termos de Uso
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="https://partagelagosulshopping.com.br/midia-kit"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/midia-kit"
                   className="hover:text-brand-wine transition-colors"
                 >
                   Mídia Kit & Anunciantes
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -310,34 +302,28 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href="https://partagelagosulshopping.com.br/fale-conosco"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/fale-conosco"
                   className="hover:text-brand-wine transition-colors"
                 >
                   Fale Conosco
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="https://partagelagosulshopping.com.br/seja-lojista"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/seja-lojista"
                   className="hover:text-brand-wine transition-colors"
                 >
                   Seja um Lojista
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="https://partagelagosulshopping.com.br/trabalhe-conosco"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/trabalhe-conosco"
                   className="hover:text-brand-wine transition-colors"
                 >
                   Trabalhe Conosco
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
