@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from './Logo';
+import { SpotlightSearch } from './SpotlightSearch';
 import {
   Menu,
   X,
@@ -18,6 +19,7 @@ const NAV_ITEMS = [
   { label: 'Gastronomia', href: '/gastronomia' },
   { label: 'Cinema VIP', href: '/cinema' },
   { label: 'Agenda', href: '/agenda' },
+  { label: 'Mapa dos Pisos', href: '/mapa' },
   { label: 'Comodidades', href: '/comodidades' },
   { label: 'Sobre', href: '/sobre' },
 ];
@@ -26,6 +28,7 @@ export function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [spotlightOpen, setSpotlightOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +36,18 @@ export function Header() {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Atalho global Cmd+K / Ctrl+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setSpotlightOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
   useEffect(() => {
@@ -93,7 +108,7 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation — Pill Style Fora.so */}
-          <nav className="hidden lg:flex items-center gap-1 p-1 bg-warm-card border border-warm-border rounded-full shadow-[0_2px_8px_rgba(44,34,35,0.03)]">
+          <nav className="hidden xl:flex items-center gap-1 p-1 bg-warm-card border border-warm-border rounded-full shadow-[0_2px_8px_rgba(44,34,35,0.03)]">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
@@ -101,7 +116,7 @@ export function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-4 py-1.5 text-[12px] font-medium uppercase tracking-[0.14em] rounded-full transition-all ${
+                  className={`px-3.5 py-1.5 text-[11.5px] font-medium uppercase tracking-[0.12em] rounded-full transition-all ${
                     isActive
                       ? 'text-white bg-brand-wine font-semibold shadow-sm'
                       : 'text-warm-taupe hover:text-warm-espresso hover:bg-white'
@@ -113,40 +128,45 @@ export function Header() {
             })}
           </nav>
 
-          {/* CTA & Actions */}
-          <div className="hidden sm:flex items-center gap-3">
-            <Link
-              href="/lojas"
-              className="inline-flex items-center gap-1.5 text-[11.5px] uppercase tracking-[0.14em] font-medium text-warm-taupe hover:text-brand-wine px-3 py-2 transition-colors"
+          {/* CTA & Actions com Botão Spotlight Cmd+K */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              type="button"
+              onClick={() => setSpotlightOpen(true)}
+              className="inline-flex items-center gap-2 text-[11.5px] font-medium text-warm-taupe hover:text-warm-espresso bg-white border border-warm-border hover:border-brand-gold px-3.5 py-2 rounded-full transition-all shadow-xs"
+              title="Buscar no Partage (Ctrl+K / ⌘K)"
             >
               <Search className="h-3.5 w-3.5 text-brand-wine" />
-              Buscar Lojas
-            </Link>
+              <span className="hidden sm:inline">Buscar...</span>
+              <kbd className="text-[10px] font-mono bg-warm-card text-warm-taupe px-1.5 py-0.5 rounded border border-warm-border">
+                ⌘K
+              </kbd>
+            </button>
 
             <a
               href="https://waze.com/ul?ll=-15.864,-47.921&navigate=yes"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-5 py-2.5 text-[11.5px] font-semibold uppercase tracking-[0.16em] text-white bg-brand-wine hover:bg-brand-wine-dark rounded-full transition-all shadow-sm hover:shadow-wine-glow"
+              className="hidden sm:inline-flex items-center justify-center px-5 py-2 text-[11.5px] font-semibold uppercase tracking-[0.16em] text-white bg-brand-wine hover:bg-brand-wine-dark rounded-full transition-all shadow-sm hover:shadow-wine-glow"
             >
               Como Chegar
             </a>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-warm-espresso hover:text-brand-wine transition-colors"
-            aria-label="Abrir menu de navegação"
-          >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
+            {/* Mobile Menu Button */}
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="xl:hidden p-2 text-warm-espresso hover:text-brand-wine transition-colors"
+              aria-label="Abrir menu de navegação"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t border-warm-border bg-warm-canvas px-5 py-6 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="xl:hidden border-t border-warm-border bg-warm-canvas px-5 py-6 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
             <nav className="flex flex-col gap-1.5">
               {NAV_ITEMS.map((item) => {
                 const isActive =
@@ -168,6 +188,17 @@ export function Header() {
             </nav>
 
             <div className="mt-6 pt-5 border-t border-warm-border flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setSpotlightOpen(true);
+                }}
+                className="w-full inline-flex items-center justify-center gap-2 py-3 text-[12px] font-semibold uppercase tracking-[0.14em] text-warm-espresso bg-white border border-warm-border rounded-full shadow-xs"
+              >
+                <Search className="h-4 w-4 text-brand-wine" />
+                Buscar no Shopping (Spotlight)
+              </button>
               <a
                 href="https://waze.com/ul?ll=-15.864,-47.921&navigate=yes"
                 target="_blank"
@@ -177,19 +208,16 @@ export function Header() {
                 <Navigation className="h-4 w-4" />
                 Navegar pelo Waze
               </a>
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=Aeroporto+lote+05+Lago+Sul+Bras%C3%ADlia"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 py-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-wine border border-brand-wine/30 hover:bg-brand-champagne/40 rounded-full transition-colors"
-              >
-                <MapPin className="h-4 w-4 text-brand-wine" />
-                Abrir no Google Maps
-              </a>
             </div>
           </div>
         )}
       </header>
+
+      {/* Modal Spotlight Search Global */}
+      <SpotlightSearch
+        isOpen={spotlightOpen}
+        onClose={() => setSpotlightOpen(false)}
+      />
     </>
   );
 }
